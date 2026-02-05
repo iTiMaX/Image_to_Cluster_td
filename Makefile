@@ -8,14 +8,28 @@ SERVICE_NAME    = nginx-td-service
 .PHONY: help setup cluster build import deploy run update check port-forward clean fclean
 
 help:
-	@echo "Commandes disponibles :"
+	@echo "------------------------------------------------------------------"
+	@echo "                        AIDE DU MAKEFILE"
+	@echo "------------------------------------------------------------------"
+	@echo "COMMANDES PRINCIPALES :"
+	@echo "  make run           : Installe, construit et déploie tout le projet (Recommandé)"
+	@echo "  make update        : Met à jour l'application après modif du HTML (Zero downtime)"
+	@echo "  make port-forward  : Ouvre l'accès au site sur le port 8081 (Background)"
+	@echo "  make stop          : Arrête le processus de port-forward"
+	@echo ""
+	@echo "ÉTAPES INDIVIDUELLES (DÉBUG) :"
 	@echo "  make setup         : Installe les dépendances (Packer, K3d, Ansible)"
-	@echo "  make run           : Installe, construit et déploie tout le projet"
-	@echo "  make update        : Met à jour l'application (après modif HTML)"
-	@echo "  make port-forward  : Rend l'application accessible sur le port 8081"
-	@echo "  make stop          : Arrête le port-forward"
-	@echo "  make fclean        : Supprime tout (cluster et fichiers temporaires)"
-
+	@echo "  make cluster       : Crée le cluster K3d"
+	@echo "  make build         : Construit l'image Docker avec Packer"
+	@echo "  make import        : Importe l'image dans le registre du cluster"
+	@echo "  make deploy        : Lance le déploiement Ansible"
+	@echo "  make check         : Vérifie l'état des pods et teste la réponse HTTP"
+	@echo ""
+	@echo "NETTOYAGE :"
+	@echo "  make clean         : Supprime le déploiement et le service (Garde le cluster)"
+	@echo "  make fclean        : Supprime tout (Cluster K3d complet)"
+	@echo "------------------------------------------------------------------"
+	
 # --- Installation des outils ---
 setup:
 	@echo "[INFO] Vérification et installation des prérequis..."
