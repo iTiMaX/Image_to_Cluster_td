@@ -1,1 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K3d - Mission Accomplished</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+        }
 
+        .container {
+            background: #2d2d2d;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+            border: 2px solid #00ff88;
+            max-width: 600px;
+            animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        h1 {
+            color: #00ff88;
+            text-transform: uppercase;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        .meme-text {
+            font-size: 1.2rem;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            background-color: #ff0055;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .tools {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            font-size: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 10px 20px;
+            background: #00ff88;
+            color: #1a1a1a;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+
+        /* Animation simple */
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .sub-text {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 20px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>IT WORKS <br>ON MY CLUSTER! 🚀</h1>
+        
+        <div class="meme-text">
+            <p>Si tu vois cette page, c'est que j'ai survécu à :</p>
+            <p>
+                1. <span class="highlight">Packer</span> (le build)<br>
+                2. <span class="highlight">K3d</span> (l'import)<br>
+                3. <span class="highlight">Ansible</span> (le deploy)
+            </p>
+            <p><i>"I don't always test my code, but when I do, I do it in production."</i></p>
+        </div>
+
+        <div class="tools">
+            📦 ➡️ 🐳 ➡️ ☸️
+        </div>
+
+        <a href="#" class="btn" onclick="alert('Bravo ! Tu mérites une pause café ☕')">CLICK FOR REWARD</a>
+
+        <div class="sub-text">
+            Server: Nginx Custom Build v1.0
+        </div>
+    </div>
+
+</body>
+</html>
