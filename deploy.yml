@@ -1,0 +1,72 @@
+- name: Deploiement nginx sur k3d
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    app_name: nginx-td
+    service_name: nginx-td-service
+    node_port: 30080
+
+  tasks:
+    # Cleanup
+    - name: Suppression du deploiement actuel
+      kubernetes.core.k8s:
+        state: absent
+        api_version: apps/v1
+        kind: Deployment
+        name: "{{ app_name }}"
+        namespace: default
+      ignore_errors: yes
+
+    - name: Suppression du service actuel
+      kubernetes.core.k8s:
+        state: absent
+        api_version: v1
+        kind: Service
+        name: "{{ service_name }}"
+        namespace: default
+      ignore_errors: yes
+
+    - name: Creation du deploiement nginx
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+            name: "{{ app_name }}"
+            namespace: default
+          spec:
+            replicas: 2
+            selector:
+              matchLabels:
+                app: "{{ app_name }}"
+            template:
+              metadata:
+                labels:
+                  app: "{{ app_name }}"
+              spec:
+                containers:
+                - name: nginx
+                  image: nginx-image-td:v1
+                  imagePullPolicy: IfNotPresent
+                  ports:
+                  - containerPort: 80
+
+    - name: Creation du service nginx
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: "{{ service_name }}"
+            namespace: default
+          spec:
+            selector:
+              app: "{{ app_name }}"
+            type: NodePort
+            ports:
+              - port: 80
+                targetPort: 80
+                nodePort: "{{ node_port }}"
